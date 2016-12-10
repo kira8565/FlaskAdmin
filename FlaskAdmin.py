@@ -21,11 +21,15 @@ users = {'admin': {'password': 'admin'}}
 
 @login_manager.user_loader
 def user_loader(username):
+    app.logger.debug("加载用户名{}".format(username), )
+
     if username not in users:
+        app.logger.debug("加载用户信息失败，无该用户")
         return
 
     user = User()
     user.id = username
+    app.logger.debug("加载用户成功")
     return user
 
 
@@ -54,8 +58,10 @@ def login():
         user = User()
         user.id = username
         flask_login.login_user(user)
+        app.logger.info("用户{}登录成功".format(username))
         return flask.redirect(flask.url_for('protected'))
     else:
+        app.logger.debug("登录失败，用户名密码不匹配")
         error = "登录失败"
         return render_template('login.html', error=error)
 
