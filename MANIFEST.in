@@ -1,0 +1,2 @@
+recursive-include FlaskAdmin/templates *
+recursive-include FlaskAdmin/static *
