@@ -2,12 +2,13 @@ import flask
 import flask_login
 from flask import Flask
 from flask import render_template
+from flask.ext.admin import Admin
 from flask.ext.login import LoginManager
 
 from models import User
 
 app = Flask(__name__)
-
+admin = Admin(app, name='自动化运维平台', template_mode='bootstrap3')
 app.secret_key = 'AutoOps'
 
 # app.register_blueprint(login)
@@ -59,7 +60,7 @@ def login():
         user.id = username
         flask_login.login_user(user)
         app.logger.info("用户{}登录成功".format(username))
-        return flask.redirect(flask.url_for('protected'))
+        return flask.redirect(flask.url_for('admin.index'))
     else:
         app.logger.debug("登录失败，用户名密码不匹配")
         error = "登录失败"

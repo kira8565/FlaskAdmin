@@ -8,4 +8,5 @@
 ## V0.0.1
 
 * 搭建起一个最基本的Flask项目
-* 整合Flask-Login，先把登录搞好
+* 整合Flask-Login
+* 整合Flask-Admin
